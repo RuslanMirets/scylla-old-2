@@ -23,6 +23,9 @@ import { NavItem } from '../NavItem';
 import styles from './Header.module.scss';
 import Link from 'next/link';
 import { AuthDialog } from '../AuthDialog';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { destroyCookie } from 'nookies';
+import { logout } from '../../store/slices/user';
 
 const pages = [
   { title: 'Главная', href: '/' },
@@ -35,6 +38,9 @@ const adminItems = [
 ];
 
 export const Header: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.data);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,6 +51,8 @@ export const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
+    destroyCookie(null, 'scyllaAuthToken', null);
+    dispatch(logout());
     handleClose();
   };
 
@@ -57,7 +65,6 @@ export const Header: React.FC = () => {
   };
 
   const isAdmin = false;
-  const user = false;
 
   return (
     <AppBar className={styles.root}>
@@ -75,7 +82,7 @@ export const Header: React.FC = () => {
             {user ? (
               <>
                 <IconButton onClick={handleClick}>
-                  <Avatar src="" alt="" />
+                  <Avatar src={user.avatar} alt={user.name} />
                 </IconButton>
                 <Menu
                   id="basic-menu"
@@ -102,7 +109,7 @@ export const Header: React.FC = () => {
                         display: 'block',
                         position: 'absolute',
                         top: 0,
-                        right: 21,
+                        right: 22,
                         width: 10,
                         height: 10,
                         bgcolor: 'background.paper',
