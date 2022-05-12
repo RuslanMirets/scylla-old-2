@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { RoleModule } from './modules/role/role.module';
 import { TypeModule } from './modules/type/type.module';
 import { CategoryModule } from './modules/category/category.module';
+import { BrandModule } from './modules/brand/brand.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CategoryModule } from './modules/category/category.module';
     RoleModule,
     TypeModule,
     CategoryModule,
+    BrandModule,
   ],
   controllers: [AppController],
   providers: [AppService],
