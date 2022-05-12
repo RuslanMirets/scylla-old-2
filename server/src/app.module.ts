@@ -7,6 +7,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RoleModule } from './modules/role/role.module';
 import { TypeModule } from './modules/type/type.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TypeModule } from './modules/type/type.module';
     AuthModule,
     RoleModule,
     TypeModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
