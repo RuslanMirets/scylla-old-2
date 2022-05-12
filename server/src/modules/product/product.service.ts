@@ -1,3 +1,4 @@
+import { SizeService } from './../size/size.service';
 import { DepartmentService } from './../department/department.service';
 import { ColorService } from './../color/color.service';
 import { BrandService } from './../brand/brand.service';
@@ -15,6 +16,7 @@ export class ProductService {
     private readonly brandService: BrandService,
     private readonly colorService: ColorService,
     private readonly departmentService: DepartmentService,
+    private readonly sizeService: SizeService,
   ) {}
 
   async create(
@@ -24,11 +26,13 @@ export class ProductService {
     colorId: number,
     departmentId: number,
     images: string[],
+    sizeId: number,
   ): Promise<Product> {
     const category = await this.categoryService.findOneById(categoryId);
     const brand = await this.brandService.findOneById(brandId);
     const color = await this.colorService.findOneById(colorId);
     const department = await this.departmentService.findOneById(departmentId);
+
     const newProduct = await this.productRepository.create<Product>({
       ...dto,
       categoryId: categoryId,
@@ -37,7 +41,14 @@ export class ProductService {
       departmentId: departmentId,
       images: images,
     });
-    return { ...newProduct['dataValues'], category, brand, color, department };
+
+    const size = await this.sizeService.findAllById(sizeId);
+    await newProduct.$set(
+      'size',
+      size.filter((item) => item.id),
+    );
+
+    return { ...newProduct['dataValues'], category, brand, color, department, size };
   }
 
   async findAll(): Promise<Product[]> {

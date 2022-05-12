@@ -11,7 +11,7 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import { Observable, of } from 'rxjs';
@@ -20,6 +20,7 @@ import { Category } from 'src/core/decorators/category.decorator';
 import { Brand } from 'src/core/decorators/brand.decorator';
 import { Color } from 'src/core/decorators/color.decorator';
 import { Department } from 'src/core/decorators/department.decorator';
+import { Size } from 'src/core/decorators/size.decorator';
 
 export const storage = {
   storage: diskStorage({
@@ -45,6 +46,7 @@ export class ProductController {
     @Color() colorId: number,
     @Department() departmentId: number,
     @UploadedFiles() files: Array<Express.Multer.File>,
+    @Size() sizeId: number,
   ): Promise<ProductModel> {
     return this.productService.create(
       dto,
@@ -53,6 +55,7 @@ export class ProductController {
       colorId,
       departmentId,
       files.map((file) => file.filename),
+      sizeId,
     );
   }
 

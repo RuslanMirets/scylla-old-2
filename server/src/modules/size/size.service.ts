@@ -20,6 +20,10 @@ export class SizeService {
     return await this.sizeRepository.findOne<Size>({ where: { id }, include: { all: true } });
   }
 
+  async findAllById(id: number): Promise<Size[]> {
+    return await this.sizeRepository.findAll({ where: { id } });
+  }
+
   async update(dto: UpdateSizeDto, id: number) {
     await this.sizeRepository.update({ value: dto.value }, { where: { id: id } });
     return dto;

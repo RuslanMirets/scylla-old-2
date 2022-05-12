@@ -2,7 +2,17 @@ import { Department } from './../../department/models/department.model';
 import { Color } from './../../color/models/color.model';
 import { Brand } from './../../brand/models/brand.model';
 import { Category } from './../../category/models/category.model';
-import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  BelongsTo,
+  ForeignKey,
+  BelongsToMany,
+} from 'sequelize-typescript';
+import { Size } from 'src/modules/size/models/size.model';
+import { ProductSize } from 'src/modules/size/models/product-size.model';
 
 @Table({ tableName: 'Product' })
 export class Product extends Model<Product> {
@@ -54,4 +64,7 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => Department, { onDelete: 'CASCADE' })
   department: Department;
+
+  @BelongsToMany(() => Size, () => ProductSize)
+  size: Size[];
 }
