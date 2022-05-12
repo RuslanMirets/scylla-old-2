@@ -1,3 +1,4 @@
+import { UpdateTypeDto } from './dto/update-type.dto';
 import { Type } from './models/type.model';
 import { TYPE_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
@@ -19,5 +20,18 @@ export class TypeService {
 
   async findOneById(id: number): Promise<Type> {
     return await this.typeRepository.findOne<Type>({ where: { id }, include: { all: true } });
+  }
+
+  async update(dto: UpdateTypeDto, id: number) {
+    await this.typeRepository.update({ name: dto.name }, { where: { id: id } });
+    return dto;
+  }
+
+  async delete(id: number) {
+    return await this.typeRepository.destroy({ where: { id: id } });
+  }
+
+  async deleteAll() {
+    return this.typeRepository.destroy({ where: {} });
   }
 }

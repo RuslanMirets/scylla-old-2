@@ -1,6 +1,7 @@
+import { UpdateTypeDto } from './dto/update-type.dto';
 import { Type as TypeModel } from './models/type.model';
 import { TypeService } from './type.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateTypeDto } from './dto/create-type.dto';
 
 @Controller('type')
@@ -15,5 +16,25 @@ export class TypeController {
   @Get()
   findAll() {
     return this.typeService.findAll();
+  }
+
+  @Get(':id')
+  findOneById(@Param('id') id: number) {
+    return this.typeService.findOneById(id);
+  }
+
+  @Patch(':id')
+  update(@Body() dto: UpdateTypeDto, @Param('id') id: number) {
+    return this.typeService.update(dto, id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.typeService.delete(id);
+  }
+
+  @Delete()
+  deleteAll() {
+    return this.typeService.deleteAll();
   }
 }
