@@ -10,6 +10,7 @@ import { UserRole } from 'src/modules/role/models/user-role.model';
 import { User } from 'src/modules/user/models/user.model';
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
+import { Product } from 'src/modules/product/models/product.model';
 
 export const databaseProvider = [
   {
@@ -30,7 +31,18 @@ export const databaseProvider = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Role, UserRole, Type, Category, Brand, Color, Size, Department]);
+      sequelize.addModels([
+        User,
+        Role,
+        UserRole,
+        Type,
+        Category,
+        Brand,
+        Color,
+        Size,
+        Department,
+        Product,
+      ]);
       await sequelize.sync();
       return sequelize;
     },

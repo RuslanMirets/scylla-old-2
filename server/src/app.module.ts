@@ -12,6 +12,7 @@ import { BrandModule } from './modules/brand/brand.module';
 import { ColorModule } from './modules/color/color.module';
 import { SizeModule } from './modules/size/size.module';
 import { DepartmentModule } from './modules/department/department.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { DepartmentModule } from './modules/department/department.module';
     ColorModule,
     SizeModule,
     DepartmentModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

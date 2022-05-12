@@ -8,5 +8,6 @@ import { categoryProvider } from './category.provider';
   imports: [TypeModule],
   providers: [CategoryService, ...categoryProvider],
   controllers: [CategoryController],
+  exports: [CategoryService],
 })
 export class CategoryModule {}
