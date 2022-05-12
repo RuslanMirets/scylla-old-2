@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import { theme } from '../theme';
 
 interface IProps {
-  children: any;
+  children?: any;
   title?: string;
   description?: string;
   keywords?: string;

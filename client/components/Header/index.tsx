@@ -27,10 +27,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { destroyCookie } from 'nookies';
 import { logout } from '../../store/actions/user';
 
-const pages = [
-  { title: 'Главная', href: '/' },
-  { title: 'Пользователи', href: '/users' },
-];
+const pages = [{ title: 'Главная', href: '/' }];
 
 const adminItems = [
   { title: 'Админ-панель', href: '/admin', icon: <AdminPanelSettingsIcon fontSize="small" /> },
@@ -40,6 +37,7 @@ const adminItems = [
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user, registerData } = useAppSelector((state) => state.user);
+  const isAdmin = user?.role[0].value === 'ADMIN';
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -69,8 +67,6 @@ export const Header: React.FC = () => {
       setAuthDialog(false);
     }
   }, [user, registerData]);
-
-  const isAdmin = false;
 
   return (
     <AppBar className={styles.root}>

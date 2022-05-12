@@ -20,7 +20,9 @@ const Users: NextPage = () => {
 
   return (
     <MainLayout title="Пользователи">
-      <Typography variant="h5">Пользователи</Typography>
+      <Typography variant="h5" sx={{ marginBottom: '20px' }}>
+        Пользователи
+      </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
