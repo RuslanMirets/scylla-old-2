@@ -1,3 +1,4 @@
+import { UpdateCategoryDto } from './dto/update-category.dto';
 import { TypeService } from './../type/type.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CATEGORY_REPOSITORY } from './../../core/constants/index';
@@ -32,5 +33,23 @@ export class CategoryService {
       where: { id },
       include: { all: true },
     });
+  }
+
+  async updateName(dto: UpdateCategoryDto, id: number) {
+    await this.categoryRepository.update({ name: dto.name }, { where: { id: id } });
+    return dto;
+  }
+
+  async updateType(typeId: number, categoryId: number) {
+    await this.categoryRepository.update({ typeId: typeId }, { where: { id: categoryId } });
+    return categoryId;
+  }
+
+  async delete(id: number) {
+    return await this.categoryRepository.destroy({ where: { id: id } });
+  }
+
+  async deleteAll() {
+    return this.categoryRepository.destroy({ where: {} });
   }
 }

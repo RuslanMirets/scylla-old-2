@@ -1,7 +1,8 @@
+import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category as CategoryModel } from './models/category.model';
 import { CategoryService } from './category.service';
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Type } from 'src/core/decorators/type.decorator';
 
 @Controller('category')
@@ -21,5 +22,25 @@ export class CategoryController {
   @Get(':id')
   findOneById(@Param('id') id: number) {
     return this.categoryService.findOneById(id);
+  }
+
+  @Patch('name/:id')
+  updateName(@Body() dto: UpdateCategoryDto, @Param('id') id: number) {
+    return this.categoryService.updateName(dto, id);
+  }
+
+  @Patch('type/:id')
+  updateType(@Type() typeId: number, @Param('id') categoryId: number) {
+    return this.categoryService.updateType(typeId, categoryId);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.categoryService.delete(id);
+  }
+
+  @Delete()
+  deleteAll() {
+    return this.categoryService.deleteAll();
   }
 }
