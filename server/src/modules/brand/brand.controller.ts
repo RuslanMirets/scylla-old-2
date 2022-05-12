@@ -1,7 +1,8 @@
+import { UpdateBrandDto } from './dto/update-brand.dto';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { Brand as BrandModel } from './models/brand.model';
 import { BrandService } from './brand.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 @Controller('brand')
 export class BrandController {
@@ -15,5 +16,25 @@ export class BrandController {
   @Get()
   findAll() {
     return this.brandService.findAll();
+  }
+
+  @Get(':id')
+  findOneById(@Param('id') id: number) {
+    return this.brandService.findOneById(id);
+  }
+
+  @Patch(':id')
+  update(@Body() dto: UpdateBrandDto, @Param('id') id: number) {
+    return this.brandService.update(dto, id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.brandService.delete(id);
+  }
+
+  @Delete()
+  deleteAll() {
+    return this.brandService.deleteAll();
   }
 }
