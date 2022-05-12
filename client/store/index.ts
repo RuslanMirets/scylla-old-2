@@ -1,3 +1,4 @@
+import { alertReducer } from './slices/alert';
 import { userReducer } from './slices/user';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
@@ -6,6 +7,7 @@ export function makeStore() {
   return configureStore({
     reducer: {
       user: userReducer,
+      alert: alertReducer,
     },
   });
 }

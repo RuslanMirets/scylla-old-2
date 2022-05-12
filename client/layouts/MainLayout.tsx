@@ -1,6 +1,7 @@
 import { Container, ThemeProvider } from '@mui/material';
 import Head from 'next/head';
 import React from 'react';
+import { Alert } from '../components/Alert';
 import { Header } from '../components/Header';
 import { theme } from '../theme';
 
@@ -25,6 +26,7 @@ const MainLayout: React.FC<IProps> = ({ children, title, description, keywords }
       <ThemeProvider theme={theme}>
         <div className="wrapper">
           <Header />
+          <Alert />
           <main className="main">
             <Container>{children}</Container>
           </main>
