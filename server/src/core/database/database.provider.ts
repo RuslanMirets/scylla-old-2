@@ -1,3 +1,4 @@
+import { Color } from './../../modules/color/models/color.model';
 import { Brand } from './../../modules/brand/models/brand.model';
 import { Category } from './../../modules/category/models/category.model';
 import { Type } from './../../modules/type/models/type.model';
@@ -27,7 +28,7 @@ export const databaseProvider = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Role, UserRole, Type, Category, Brand]);
+      sequelize.addModels([User, Role, UserRole, Type, Category, Brand, Color]);
       await sequelize.sync();
       return sequelize;
     },

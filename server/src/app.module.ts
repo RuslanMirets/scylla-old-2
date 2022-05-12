@@ -9,6 +9,7 @@ import { RoleModule } from './modules/role/role.module';
 import { TypeModule } from './modules/type/type.module';
 import { CategoryModule } from './modules/category/category.module';
 import { BrandModule } from './modules/brand/brand.module';
+import { ColorModule } from './modules/color/color.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BrandModule } from './modules/brand/brand.module';
     TypeModule,
     CategoryModule,
     BrandModule,
+    ColorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
