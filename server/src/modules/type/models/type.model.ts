@@ -1,5 +1,5 @@
-import { Category } from './../../category/models/category.model';
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
+import { TypeDepartment } from 'src/modules/type-department/models/type-department.model';
 
 @Table({ tableName: 'Type' })
 export class Type extends Model<Type> {
@@ -12,6 +12,6 @@ export class Type extends Model<Type> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;
 
-  @HasMany(() => Category)
-  category: Category;
+  @HasMany(() => TypeDepartment)
+  typeDepartment: TypeDepartment;
 }

@@ -1,5 +1,7 @@
 import { Product } from './../../product/models/product.model';
-import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
+import { Table, Model, Column, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Type } from 'src/modules/type/models/type.model';
+import { TypeDepartment } from 'src/modules/type-department/models/type-department.model';
 
 @Table({ tableName: 'Department' })
 export class Department extends Model<Department> {
@@ -14,4 +16,7 @@ export class Department extends Model<Department> {
 
   @HasMany(() => Product)
   product: Product;
+
+  @BelongsToMany(() => Type, () => TypeDepartment)
+  type: Type[];
 }

@@ -27,6 +27,10 @@ export class DepartmentService {
     });
   }
 
+  async findAllById(id: number): Promise<Department[]> {
+    return await this.departmentRepository.findAll({ where: { id } });
+  }
+
   async findOneBySlug(slug: string): Promise<Department> {
     return await this.departmentRepository.findOne<Department>({
       where: { slug },

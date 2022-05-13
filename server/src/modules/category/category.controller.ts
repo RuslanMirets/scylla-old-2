@@ -29,11 +29,6 @@ export class CategoryController {
     return this.categoryService.updateName(dto, id);
   }
 
-  @Patch('type/:id')
-  updateType(@Type() typeId: number, @Param('id') categoryId: number) {
-    return this.categoryService.updateType(typeId, categoryId);
-  }
-
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.categoryService.delete(id);

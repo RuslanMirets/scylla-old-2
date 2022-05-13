@@ -13,6 +13,7 @@ import { ColorModule } from './modules/color/color.module';
 import { SizeModule } from './modules/size/size.module';
 import { DepartmentModule } from './modules/department/department.module';
 import { ProductModule } from './modules/product/product.module';
+import { TypeDepartmentModule } from './modules/type-department/type-department.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ProductModule } from './modules/product/product.module';
     SizeModule,
     DepartmentModule,
     ProductModule,
+    TypeDepartmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

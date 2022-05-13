@@ -12,6 +12,7 @@ import { User } from 'src/modules/user/models/user.model';
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
 import { Product } from 'src/modules/product/models/product.model';
+import { TypeDepartment } from 'src/modules/type-department/models/type-department.model';
 
 export const databaseProvider = [
   {
@@ -44,6 +45,7 @@ export const databaseProvider = [
         Department,
         Product,
         ProductSize,
+        TypeDepartment,
       ]);
       await sequelize.sync();
       return sequelize;

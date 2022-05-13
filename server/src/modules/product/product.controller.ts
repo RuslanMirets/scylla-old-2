@@ -64,13 +64,13 @@ export class ProductController {
     return this.productService.findAll();
   }
 
-  @Get('image/:imagename')
-  findProfileImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
-    return of(res.sendFile(join(process.cwd(), 'uploads/images/product/' + imagename)));
-  }
-
   @Get(':id')
   findOneById(@Param('id') id: number) {
     return this.productService.findOneById(id);
+  }
+
+  @Get('image/:imagename')
+  findProfileImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
+    return of(res.sendFile(join(process.cwd(), 'uploads/images/product/' + imagename)));
   }
 }

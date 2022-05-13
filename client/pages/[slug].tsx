@@ -1,3 +1,4 @@
+import { Paper, Typography } from '@mui/material';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
@@ -16,12 +17,14 @@ const Department = () => {
 
   return (
     <MainLayout>
-      <div>{department?.name}</div>
-      <div>
+      <Typography variant="h4" sx={{ marginBottom: '30px' }}>
+        {department?.name} отдел
+      </Typography>
+      <Paper sx={{ padding: '20px' }}>
         {types.map((type) => (
           <div>{type.name}</div>
         ))}
-      </div>
+      </Paper>
     </MainLayout>
   );
 };

@@ -18,11 +18,6 @@ export class TypeController {
     return this.typeService.findAll();
   }
 
-  @Get('department/:slug')
-  findAllByDepartment(@Param('slug') department: string) {
-    return this.typeService.findAllByDepartment(department);
-  }
-
   @Get(':id')
   findOneById(@Param('id') id: number) {
     return this.typeService.findOneById(id);
