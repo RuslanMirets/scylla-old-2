@@ -27,6 +27,13 @@ export class DepartmentService {
     });
   }
 
+  async findOneBySlug(slug: string): Promise<Department> {
+    return await this.departmentRepository.findOne<Department>({
+      where: { slug },
+      include: { all: true },
+    });
+  }
+
   async update(dto: UpdateDepartmentDto, id: number) {
     await this.departmentRepository.update({ name: dto.name }, { where: { id: id } });
     return dto;

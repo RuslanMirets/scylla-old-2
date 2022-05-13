@@ -23,6 +23,11 @@ export class DepartmentController {
     return this.departmentService.findOneById(id);
   }
 
+  @Get('/slug/:slug')
+  findOneBySlug(@Param('slug') slug: string) {
+    return this.departmentService.findOneBySlug(slug);
+  }
+
   @Patch(':id')
   update(@Body() dto: UpdateDepartmentDto, @Param('id') id: number) {
     return this.departmentService.update(dto, id);

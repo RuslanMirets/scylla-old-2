@@ -4,7 +4,7 @@ import { Button, ListItem } from '@mui/material';
 import styles from './NavItem.module.scss';
 
 interface IProps {
-  title: string;
+  title: any;
   href: string;
   onClick?: any;
 }

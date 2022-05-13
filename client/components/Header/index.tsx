@@ -68,6 +68,8 @@ export const Header: React.FC = () => {
     }
   }, [user, registerData]);
 
+  const { departments } = useAppSelector((state) => state.department);
+
   return (
     <AppBar className={styles.root}>
       <Container>
@@ -78,6 +80,13 @@ export const Header: React.FC = () => {
           <Box className={styles.menu}>
             {pages.map((page) => (
               <NavItem key={page.title} title={page.title} href={page.href} />
+            ))}
+            {departments.map((department) => (
+              <NavItem
+                key={department.id}
+                title={department.name === 'Мужской' ? 'Мужчинам' : 'Женщинам'}
+                href={`/${department.slug}`}
+              />
             ))}
           </Box>
           <Box className={styles.actions}>

@@ -1,13 +1,17 @@
+import { departmentReducer } from './slices/department';
 import { alertReducer } from './slices/alert';
 import { userReducer } from './slices/user';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
+import { typeReducer } from './slices/type';
 
 export function makeStore() {
   return configureStore({
     reducer: {
       user: userReducer,
       alert: alertReducer,
+      department: departmentReducer,
+      type: typeReducer,
     },
   });
 }

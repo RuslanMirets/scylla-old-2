@@ -1,5 +1,14 @@
+import { Product } from './../../product/models/product.model';
 import { Type } from './../../type/models/type.model';
-import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  BelongsTo,
+  ForeignKey,
+  HasMany,
+} from 'sequelize-typescript';
 
 @Table({ tableName: 'Category' })
 export class Category extends Model<Category> {
@@ -18,4 +27,7 @@ export class Category extends Model<Category> {
 
   @BelongsTo(() => Type, { onDelete: 'CASCADE' })
   type: Type;
+
+  @HasMany(() => Product)
+  product: Product;
 }

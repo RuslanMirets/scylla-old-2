@@ -1,9 +1,13 @@
+import { Product } from './../product/models/product.model';
+import { Category } from './../category/models/category.model';
 import { UpdateTypeDto } from './dto/update-type.dto';
 import { Type } from './models/type.model';
 import { TYPE_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateTypeDto } from './dto/create-type.dto';
 import slugify from 'slugify';
+import { Department } from '../department/models/department.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class TypeService {
@@ -16,6 +20,24 @@ export class TypeService {
 
   async findAll(): Promise<Type[]> {
     return await this.typeRepository.findAll<Type>({ include: { all: true } });
+  }
+
+  async findAllByDepartment(department: string): Promise<Type[]> {
+    return await this.typeRepository.findAll<Type>({
+      include: [
+        {
+          model: Category,
+          required: true,
+          include: [
+            {
+              model: Product,
+              required: true,
+              include: [{ model: Department, where: { slug: { [Op.eq]: department } } }],
+            },
+          ],
+        },
+      ],
+    });
   }
 
   async findOneById(id: number): Promise<Type> {
