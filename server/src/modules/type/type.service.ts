@@ -23,7 +23,8 @@ export class TypeService {
 
   async findAllByDepartment(slug: string): Promise<Type[]> {
     return await this.typeRepository.findAll<Type>({
-      include: [{ model: Department, where: { slug: { [Op.eq]: slug } } }],
+      where: { '$department.slug$': { [Op.eq]: slug } },
+      include: { all: true },
     });
   }
 
