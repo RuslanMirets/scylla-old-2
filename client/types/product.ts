@@ -3,10 +3,8 @@ import { IColor } from './color';
 import { IBrand } from './brand';
 import { ICategory } from './category';
 import { ISize } from './size';
+import { IImage } from './image';
 
-interface IImages {
-  filename: string
-}
 export interface IProduct {
   id: number;
   title: string;
@@ -19,5 +17,5 @@ export interface IProduct {
   color: IColor[];
   department: IDepartment;
   size: ISize[];
-  images: IImages[];
+  images: IImage[];
 }
