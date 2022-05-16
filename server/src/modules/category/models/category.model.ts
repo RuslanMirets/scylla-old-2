@@ -22,9 +22,6 @@ export class Category extends Model<Category> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;
 
-  @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  image: string;
-
   @ForeignKey(() => Type)
   @Column({ type: DataType.INTEGER, allowNull: false })
   typeId: number;

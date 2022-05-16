@@ -1,3 +1,4 @@
+import { TypeService } from './../type/type.service';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CATEGORY_REPOSITORY } from './../../core/constants/index';
@@ -7,15 +8,20 @@ import slugify from 'slugify';
 
 @Injectable()
 export class CategoryService {
-  constructor(@Inject(CATEGORY_REPOSITORY) private readonly categoryRepository: typeof Category) {}
+  constructor(
+    @Inject(CATEGORY_REPOSITORY) private readonly categoryRepository: typeof Category,
+    private readonly typeService: TypeService,
+  ) {}
 
   async create(dto: CreateCategoryDto, typeId: number): Promise<Category> {
     const slug = slugify(dto.name, { lower: true });
+    const type = await this.typeService.findOneById(typeId);
     const newCategory = await this.categoryRepository.create<Category>({
       ...dto,
       slug,
+      typeId,
     });
-    return { ...newCategory['dataValues'] };
+    return { ...newCategory['dataValues'], type };
   }
 
   async findAll(): Promise<Category[]> {

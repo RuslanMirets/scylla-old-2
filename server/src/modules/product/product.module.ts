@@ -1,3 +1,4 @@
+import { DepartmentModule } from './../department/department.module';
 import { SizeModule } from './../size/size.module';
 import { BrandModule } from './../brand/brand.module';
 import { CategoryModule } from './../category/category.module';
@@ -8,7 +9,7 @@ import { ColorModule } from '../color/color.module';
 import { productProvider } from './product.provider';
 
 @Module({
-  imports: [CategoryModule, BrandModule, ColorModule, SizeModule],
+  imports: [CategoryModule, DepartmentModule, BrandModule, ColorModule, SizeModule],
   providers: [ProductService, ...productProvider],
   controllers: [ProductController],
 })

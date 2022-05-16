@@ -1,3 +1,4 @@
+import { ProductColor } from './../../modules/color/models/product-color';
 import { ProductSize } from './../../modules/size/models/product-size.model';
 import { Department } from './../../modules/department/models/department.model';
 import { Size } from './../../modules/size/models/size.model';
@@ -44,6 +45,7 @@ export const databaseProvider = [
         Department,
         Product,
         ProductSize,
+        ProductColor,
       ]);
       await sequelize.sync();
       return sequelize;

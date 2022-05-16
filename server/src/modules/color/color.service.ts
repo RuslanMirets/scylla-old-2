@@ -20,6 +20,10 @@ export class ColorService {
     return await this.colorRepository.findOne<Color>({ where: { id }, include: { all: true } });
   }
 
+  async findAllById(id: number): Promise<Color[]> {
+    return await this.colorRepository.findAll({ where: { id } });
+  }
+
   async update(dto: UpdateColorDto, id: number) {
     await this.colorRepository.update({ name: dto.name }, { where: { id: id } });
     return dto;
