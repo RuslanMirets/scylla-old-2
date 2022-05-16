@@ -14,7 +14,7 @@ export const typeSlice = createSlice({
   name: 'type',
   initialState,
   reducers: {
-    getTypeByDepartment(state, action) {
+    getTypesByDepartment(state, action) {
       state.types = action.payload;
     },
   },
