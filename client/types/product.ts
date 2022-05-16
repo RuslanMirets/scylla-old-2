@@ -4,6 +4,9 @@ import { IBrand } from './brand';
 import { ICategory } from './category';
 import { ISize } from './size';
 
+interface IImages {
+  filename: string
+}
 export interface IProduct {
   id: number;
   title: string;
@@ -13,7 +16,8 @@ export interface IProduct {
   sold: number;
   category: ICategory;
   brand: IBrand;
-  color: IColor;
+  color: IColor[];
   department: IDepartment;
   size: ISize[];
+  images: IImages[];
 }

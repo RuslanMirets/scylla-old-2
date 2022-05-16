@@ -1,6 +1,7 @@
-import { Paper, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
+import { ProductCard } from '../components/ProductCard';
 import MainLayout from '../layouts/MainLayout';
 import { wrapper } from '../store';
 import { getDepartment } from '../store/actions/department';
@@ -20,11 +21,20 @@ const Department = () => {
       <Typography variant="h4" sx={{ marginBottom: '30px' }}>
         {department?.name}
       </Typography>
-      <Paper sx={{ padding: '20px' }}>
+      <Box className="product-list">
         {products.map((product) => (
-          <div>{product.title}</div>
+          <>
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+          </>
         ))}
-      </Paper>
+      </Box>
     </MainLayout>
   );
 };

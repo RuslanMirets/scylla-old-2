@@ -1,0 +1,1 @@
+export const productImage = 'http://localhost:5000/product/image/';
