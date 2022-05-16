@@ -19,7 +19,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Category } from 'src/core/decorators/category.decorator';
 import { Brand } from 'src/core/decorators/brand.decorator';
 import { Color } from 'src/core/decorators/color.decorator';
-import { Department } from 'src/core/decorators/department.decorator';
 import { Size } from 'src/core/decorators/size.decorator';
 
 export const storage = {
@@ -44,7 +43,6 @@ export class ProductController {
     @Category() categoryId: number,
     @Brand() brandId: number,
     @Color() colorId: number,
-    @Department() departmentId: number,
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Size() sizeId: number,
   ): Promise<ProductModel> {
@@ -53,7 +51,6 @@ export class ProductController {
       categoryId,
       brandId,
       colorId,
-      departmentId,
       files.map((file) => file.filename),
       sizeId,
     );

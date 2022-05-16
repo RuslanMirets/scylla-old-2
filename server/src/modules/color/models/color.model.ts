@@ -9,6 +9,6 @@ export class Color extends Model<Color> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
 
-  @HasMany(() => Product)
+  @HasMany(() => Product, { onDelete: 'CASCADE' })
   product: Product;
 }

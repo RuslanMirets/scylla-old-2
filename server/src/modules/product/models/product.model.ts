@@ -1,4 +1,3 @@
-import { Department } from './../../department/models/department.model';
 import { Color } from './../../color/models/color.model';
 import { Brand } from './../../brand/models/brand.model';
 import { Category } from './../../category/models/category.model';
@@ -57,13 +56,6 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => Color, { onDelete: 'CASCADE' })
   color: Color;
-
-  @ForeignKey(() => Department)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  departmentId: number;
-
-  @BelongsTo(() => Department, { onDelete: 'CASCADE' })
-  department: Department;
 
   @BelongsToMany(() => Size, () => ProductSize)
   size: Size[];
