@@ -51,6 +51,11 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
+  @Get('type/:slug')
+  findAllByDepartment(@Param('slug') slug: string) {
+    return this.categoryService.findAllByType(slug);
+  }
+
   @Get(':id')
   findOneById(@Param('id') id: number) {
     return this.categoryService.findOneById(id);

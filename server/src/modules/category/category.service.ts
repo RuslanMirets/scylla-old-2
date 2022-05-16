@@ -5,6 +5,8 @@ import { CATEGORY_REPOSITORY } from './../../core/constants/index';
 import { Category } from './models/category.model';
 import { Inject, Injectable } from '@nestjs/common';
 import slugify from 'slugify';
+import { Type } from '../type/models/type.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CategoryService {
@@ -33,6 +35,12 @@ export class CategoryService {
     return await this.categoryRepository.findOne<Category>({
       where: { id },
       include: { all: true },
+    });
+  }
+
+  async findAllByType(slug: string): Promise<Category[]> {
+    return await this.categoryRepository.findAll<Category>({
+      include: [{ model: Type, where: { slug: { [Op.eq]: slug } } }],
     });
   }
 

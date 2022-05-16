@@ -1,3 +1,4 @@
+import { Category } from 'src/modules/category/models/category.model';
 import { UpdateTypeDto } from './dto/update-type.dto';
 import { Type } from './models/type.model';
 import { TYPE_REPOSITORY } from './../../core/constants/index';

@@ -1,10 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
-import { TypeCard } from '../../components/TypeCard';
+import { CatalogCard } from '../../components/TypeCard';
 import MainLayout from '../../layouts/MainLayout';
 import { wrapper } from '../../store';
-import { getCategoriesByType } from '../../store/actions/category';
 import { getDepartment } from '../../store/actions/department';
 import { getTypesByDepartment } from '../../store/actions/type';
 import { useAppSelector } from '../../store/hooks';
@@ -24,7 +23,7 @@ const Department = () => {
       </Typography>
       <Box className="catalog-list">
         {types.map((type) => (
-          <TypeCard type={type}  />
+          <CatalogCard type={type} />
         ))}
       </Box>
     </MainLayout>

@@ -1,3 +1,4 @@
+import { categoryReducer } from './slices/category';
 import { productReducer } from './slices/product';
 import { departmentReducer } from './slices/department';
 import { alertReducer } from './slices/alert';
@@ -13,6 +14,7 @@ export function makeStore() {
       alert: alertReducer,
       department: departmentReducer,
       type: typeReducer,
+      category: categoryReducer,
       product: productReducer,
     },
   });
