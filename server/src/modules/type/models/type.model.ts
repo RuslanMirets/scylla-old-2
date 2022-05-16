@@ -1,5 +1,5 @@
-import { Table, Model, Column, DataType, BelongsTo, ForeignKey } from 'sequelize-typescript';
-import { Department } from 'src/modules/department/models/department.model';
+import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
+import { Category } from 'src/modules/category/models/category.model';
 
 @Table({ tableName: 'Type' })
 export class Type extends Model<Type> {
@@ -12,10 +12,6 @@ export class Type extends Model<Type> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;
 
-  @ForeignKey(() => Department)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  departmentId: number;
-
-  @BelongsTo(() => Department, { onDelete: 'CASCADE' })
-  department: Department;
+  @HasMany(() => Category, { onDelete: 'CASCADE' })
+  category: Category;
 }

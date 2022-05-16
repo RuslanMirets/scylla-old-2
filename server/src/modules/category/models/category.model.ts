@@ -9,6 +9,7 @@ import {
 } from 'sequelize-typescript';
 import { Department } from 'src/modules/department/models/department.model';
 import { Product } from 'src/modules/product/models/product.model';
+import { Type } from 'src/modules/type/models/type.model';
 
 @Table({ tableName: 'Category' })
 export class Category extends Model<Category> {
@@ -24,12 +25,12 @@ export class Category extends Model<Category> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   image: string;
 
-  @ForeignKey(() => Department)
+  @ForeignKey(() => Type)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  departmentId: number;
+  typeId: number;
 
-  @BelongsTo(() => Department, { onDelete: 'CASCADE' })
-  department: Department;
+  @BelongsTo(() => Type, { onDelete: 'CASCADE' })
+  type: Type;
 
   @HasMany(() => Product, { onDelete: 'CASCADE' })
   product: Product;
