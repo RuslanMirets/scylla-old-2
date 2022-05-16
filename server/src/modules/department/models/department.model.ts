@@ -1,5 +1,5 @@
 import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
-import { Product } from 'src/modules/product/models/product.model';
+import { Type } from 'src/modules/type/models/type.model';
 
 @Table({ tableName: 'Department' })
 export class Department extends Model<Department> {
@@ -12,6 +12,6 @@ export class Department extends Model<Department> {
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;
 
-  @HasMany(() => Product, { onDelete: 'CASCADE' })
-  product: Product;
+  @HasMany(() => Type, { onDelete: 'CASCADE' })
+  type: Type;
 }

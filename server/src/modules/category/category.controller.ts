@@ -2,16 +2,48 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category as CategoryModel } from './models/category.model';
 import { CategoryService } from './category.service';
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { Type } from 'src/core/decorators/type.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import { Observable, of } from 'rxjs';
+import { join } from 'path';
+
+export const storage = {
+  storage: diskStorage({
+    destination: './uploads/images/category',
+    filename: (req, file, callback) => {
+      const filename = uuidv4();
+      const extension = file.originalname.split('.').pop();
+      callback(null, `${filename}.${extension}`);
+    },
+  }),
+};
 
 @Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  create(@Body() dto: CreateCategoryDto, @Type() typeId: number): Promise<CategoryModel> {
-    return this.categoryService.create(dto, typeId);
+  @UseInterceptors(FileInterceptor('image', storage))
+  create(
+    @Body() dto: CreateCategoryDto,
+    @UploadedFile() file: Express.Multer.File,
+    @Type() typeId: number,
+  ): Promise<CategoryModel> {
+    return this.categoryService.create(dto, file.filename, typeId);
   }
 
   @Get()
@@ -37,5 +69,10 @@ export class CategoryController {
   @Delete()
   deleteAll() {
     return this.categoryService.deleteAll();
+  }
+
+  @Get('image/:imagename')
+  findProfileImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
+    return of(res.sendFile(join(process.cwd(), 'uploads/images/category/' + imagename)));
   }
 }

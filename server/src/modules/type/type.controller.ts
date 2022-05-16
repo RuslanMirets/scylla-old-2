@@ -1,16 +1,47 @@
 import { UpdateTypeDto } from './dto/update-type.dto';
 import { Type as TypeModel } from './models/type.model';
 import { TypeService } from './type.service';
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CreateTypeDto } from './dto/create-type.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import { Observable, of } from 'rxjs';
+import { join } from 'path';
+
+export const storage = {
+  storage: diskStorage({
+    destination: './uploads/images/type',
+    filename: (req, file, callback) => {
+      const filename = uuidv4();
+      const extension = file.originalname.split('.').pop();
+      callback(null, `${filename}.${extension}`);
+    },
+  }),
+};
 
 @Controller('type')
 export class TypeController {
   constructor(private readonly typeService: TypeService) {}
 
   @Post()
-  create(@Body() dto: CreateTypeDto): Promise<TypeModel> {
-    return this.typeService.create(dto);
+  @UseInterceptors(FileInterceptor('image', storage))
+  create(
+    @Body() dto: CreateTypeDto,
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<TypeModel> {
+    return this.typeService.create(dto, file.filename);
   }
 
   @Get()
@@ -41,5 +72,10 @@ export class TypeController {
   @Delete()
   deleteAll() {
     return this.typeService.deleteAll();
+  }
+
+  @Get('image/:imagename')
+  findProfileImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
+    return of(res.sendFile(join(process.cwd(), 'uploads/images/type/' + imagename)));
   }
 }

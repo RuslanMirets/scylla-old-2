@@ -20,7 +20,6 @@ import { Category } from 'src/core/decorators/category.decorator';
 import { Brand } from 'src/core/decorators/brand.decorator';
 import { Color } from 'src/core/decorators/color.decorator';
 import { Size } from 'src/core/decorators/size.decorator';
-import { Department } from 'src/core/decorators/department.decorator';
 
 export const storage = {
   storage: diskStorage({
@@ -42,7 +41,6 @@ export class ProductController {
   create(
     @Body() dto: CreateProductDto,
     @Category() categoryId: number,
-    @Department() departmentId: number,
     @Brand() brandId: number,
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Size() sizeId: number,
@@ -51,7 +49,6 @@ export class ProductController {
     return this.productService.create(
       dto,
       categoryId,
-      departmentId,
       brandId,
       files.map((file) => file.filename),
       sizeId,

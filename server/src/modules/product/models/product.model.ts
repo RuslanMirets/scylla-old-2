@@ -13,7 +13,6 @@ import {
 } from 'sequelize-typescript';
 import { Size } from 'src/modules/size/models/size.model';
 import { ProductSize } from 'src/modules/size/models/product-size.model';
-import { Department } from 'src/modules/department/models/department.model';
 
 @Table({ tableName: 'Product' })
 export class Product extends Model<Product> {
@@ -44,13 +43,6 @@ export class Product extends Model<Product> {
 
   @BelongsTo(() => Category, { onDelete: 'CASCADE' })
   category: Category;
-
-  @ForeignKey(() => Department)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  departmentId: number;
-
-  @BelongsTo(() => Department, { onDelete: 'CASCADE' })
-  department: Department;
 
   @ForeignKey(() => Brand)
   @Column({ type: DataType.INTEGER, allowNull: false })

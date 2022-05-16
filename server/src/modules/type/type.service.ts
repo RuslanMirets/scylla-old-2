@@ -4,8 +4,6 @@ import { TYPE_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateTypeDto } from './dto/create-type.dto';
 import slugify from 'slugify';
-import { Category } from '../category/models/category.model';
-import { Product } from '../product/models/product.model';
 import { Department } from '../department/models/department.model';
 import { Op } from 'sequelize';
 
@@ -13,9 +11,9 @@ import { Op } from 'sequelize';
 export class TypeService {
   constructor(@Inject(TYPE_REPOSITORY) private readonly typeRepository: typeof Type) {}
 
-  async create(dto: CreateTypeDto): Promise<Type> {
+  async create(dto: CreateTypeDto, image: string): Promise<Type> {
     const slug = slugify(dto.name, { lower: true });
-    return await this.typeRepository.create<Type>({ ...dto, slug });
+    return await this.typeRepository.create<Type>({ ...dto, slug, image });
   }
 
   async findAll(): Promise<Type[]> {
@@ -24,19 +22,7 @@ export class TypeService {
 
   async findAllByDepartment(slug: string): Promise<Type[]> {
     return await this.typeRepository.findAll<Type>({
-      include: [
-        {
-          model: Category,
-          required: true,
-          include: [
-            {
-              model: Product,
-              required: true,
-              include: [{ model: Department, where: { slug: { [Op.eq]: slug } } }],
-            },
-          ],
-        },
-      ],
+      include: [{ model: Department, where: { slug: { [Op.eq]: slug } } }],
     });
   }
 
