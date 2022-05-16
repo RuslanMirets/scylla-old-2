@@ -12,7 +12,7 @@ export class TypeService {
   constructor(@Inject(TYPE_REPOSITORY) private readonly typeRepository: typeof Type) {}
 
   async create(dto: CreateTypeDto, image: string): Promise<Type> {
-    const slug = slugify(dto.name, { lower: true });
+    const slug = slugify(dto.value, { lower: true });
     return await this.typeRepository.create<Type>({ ...dto, slug, image });
   }
 
