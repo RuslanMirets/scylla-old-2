@@ -73,4 +73,9 @@ export class ProductController {
   findProfileImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
     return of(res.sendFile(join(process.cwd(), 'uploads/images/product/' + imagename)));
   }
+
+  @Get('department/:id')
+  findAllByDepartment(@Param('id') slug: string) {
+    return this.productService.findAllByDepartment(slug);
+  }
 }

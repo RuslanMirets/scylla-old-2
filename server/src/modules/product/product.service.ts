@@ -7,6 +7,8 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './models/product.model';
 import { PRODUCT_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
+import { Department } from '../department/models/department.model';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductService {
@@ -61,5 +63,11 @@ export class ProductService {
 
   async findOneById(id: number): Promise<Product> {
     return await this.productRepository.findOne<Product>({ where: { id }, include: { all: true } });
+  }
+
+  async findAllByDepartment(slug: string): Promise<Product[]> {
+    return await this.productRepository.findAll<Product>({
+      include: [{ model: Department, where: { slug: { [Op.eq]: slug } } }],
+    });
   }
 }

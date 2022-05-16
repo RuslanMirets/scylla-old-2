@@ -4,7 +4,7 @@ import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { wrapper } from '../store';
 import { getDepartment } from '../store/actions/department';
-import { getTypeByDepartment } from '../store/actions/type';
+import { getProductsByDepartment } from '../store/actions/product';
 import { useAppSelector } from '../store/hooks';
 
 interface IParams extends ParsedUrlQuery {
@@ -13,16 +13,16 @@ interface IParams extends ParsedUrlQuery {
 
 const Department = () => {
   const { department } = useAppSelector((state) => state.department);
-  const { types } = useAppSelector((state) => state.type);
+  const { products } = useAppSelector((state) => state.product);
 
   return (
     <MainLayout>
       <Typography variant="h4" sx={{ marginBottom: '30px' }}>
-        {department?.name} отдел
+        {department?.name}
       </Typography>
       <Paper sx={{ padding: '20px' }}>
-        {types.map((type) => (
-          <div>{type.name}</div>
+        {products.map((product) => (
+          <div>{product.title}</div>
         ))}
       </Paper>
     </MainLayout>
@@ -32,7 +32,7 @@ const Department = () => {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const { slug } = context.params as IParams;
   await store.dispatch(getDepartment(slug));
-  await store.dispatch(getTypeByDepartment(slug));
+  await store.dispatch(getProductsByDepartment(slug));
   return { props: {} };
 });
 

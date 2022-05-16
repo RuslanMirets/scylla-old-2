@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
             {departments.map((department) => (
               <NavItem
                 key={department.id}
-                title={department.name === 'Мужской' ? 'Мужчинам' : 'Женщинам'}
+                title={department.id === 1 ? 'Мужчинам' : 'Женщинам'}
                 href={`/${department.slug}`}
               />
             ))}
