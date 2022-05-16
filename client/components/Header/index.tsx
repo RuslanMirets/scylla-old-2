@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
               <NavItem
                 key={department.id}
                 title={department.id === 1 ? 'Мужчинам' : 'Женщинам'}
-                href={`/${department.slug}`}
+                href={`/catalog/${department.slug}`}
               />
             ))}
           </Box>

@@ -14,7 +14,7 @@ export class CategoryService {
   ) {}
 
   async create(dto: CreateCategoryDto, image: string, typeId: number): Promise<Category> {
-    const slug = slugify(dto.value, { lower: true });
+    const slug = slugify(dto.description, { lower: true });
     const type = await this.typeService.findOneById(typeId);
     const newCategory = await this.categoryRepository.create<Category>({
       ...dto,

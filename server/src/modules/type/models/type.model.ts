@@ -19,7 +19,7 @@ export class Type extends Model<Type> {
   name: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  value: string;
+  description: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;

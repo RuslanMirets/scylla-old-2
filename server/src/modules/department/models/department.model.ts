@@ -10,6 +10,9 @@ export class Department extends Model<Department> {
   name: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
+  description: string;
+
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
   slug: string;
 
   @HasMany(() => Type, { onDelete: 'CASCADE' })
