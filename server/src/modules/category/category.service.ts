@@ -31,6 +31,12 @@ export class CategoryService {
     return await this.categoryRepository.findAll<Category>({ include: { all: true } });
   }
 
+  async findAllByType(slug: string): Promise<Category[]> {
+    return await this.categoryRepository.findAll<Category>({
+      include: [{ model: Type, where: { slug: { [Op.eq]: slug } } }],
+    });
+  }
+
   async findOneById(id: number): Promise<Category> {
     return await this.categoryRepository.findOne<Category>({
       where: { id },
@@ -38,9 +44,10 @@ export class CategoryService {
     });
   }
 
-  async findAllByType(slug: string): Promise<Category[]> {
-    return await this.categoryRepository.findAll<Category>({
-      include: [{ model: Type, where: { slug: { [Op.eq]: slug } } }],
+  async findOneBySlug(slug: string): Promise<Category> {
+    return await this.categoryRepository.findOne<Category>({
+      where: { slug },
+      include: { all: true },
     });
   }
 

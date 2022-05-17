@@ -32,6 +32,13 @@ export class TypeService {
     return await this.typeRepository.findOne<Type>({ where: { id }, include: { all: true } });
   }
 
+  async findOneBySlug(slug: string): Promise<Type> {
+    return await this.typeRepository.findOne<Type>({
+      where: { slug },
+      include: { all: true },
+    });
+  }
+
   async update(dto: UpdateTypeDto, id: number) {
     await this.typeRepository.update({ name: dto.name }, { where: { id: id } });
     return dto;

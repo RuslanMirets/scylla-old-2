@@ -1,6 +1,6 @@
 import { Card, CardMedia, CardContent, Typography } from '@mui/material';
 import React from 'react';
-import { ICategory } from '../../types/category';
+import { useAppSelector } from '../../store/hooks';
 import { IType } from '../../types/type';
 import { typeImage } from '../../utils/constants';
 import { LinkItem } from '../LinkItem';
@@ -11,15 +11,15 @@ interface IProps {
 }
 
 export const TypeCard: React.FC<IProps> = ({ type }) => {
-  // console.log(type.category[0]);
-  
+  const { department } = useAppSelector((state) => state.department);
+
   return (
     <Card className={styles.root}>
-      <LinkItem href=''>
-        <CardMedia component="img" height="140" image={typeImage + type.image} alt={type.name} />
+      <LinkItem href={`/catalog/${department?.slug}/${type.slug}`}>
+        <CardMedia component="img" image={typeImage + type.image} alt={type.name} />
       </LinkItem>
       <CardContent>
-        <LinkItem href="#">
+        <LinkItem href={`/catalog/${department?.slug}/${type.slug}`}>
           <Typography variant="h6">{type.name}</Typography>
         </LinkItem>
       </CardContent>

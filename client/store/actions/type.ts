@@ -11,3 +11,12 @@ export const getTypesByDepartment = (slug: string) => async (dispatch: AppDispat
     dispatch(alertSlice.actions.errors(error.response.data.message));
   }
 };
+
+export const getTypeBySlug = (slug: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await getAPI(`type/slug/${slug}`);
+    dispatch(typeSlice.actions.getTypeBySlug(response.data));
+  } catch (error: any) {
+    dispatch(alertSlice.actions.errors(error.response.data.message));
+  }
+};

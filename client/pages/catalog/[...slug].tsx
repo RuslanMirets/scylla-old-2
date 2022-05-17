@@ -4,8 +4,7 @@ import React from 'react';
 import { TypeCard } from '../../components/TypeCard';
 import MainLayout from '../../layouts/MainLayout';
 import { wrapper } from '../../store';
-import { getCategoriesByType } from '../../store/actions/category';
-import { getDepartment } from '../../store/actions/department';
+import { getDepartmentBySlug } from '../../store/actions/department';
 import { getTypesByDepartment } from '../../store/actions/type';
 import { useAppSelector } from '../../store/hooks';
 
@@ -24,7 +23,7 @@ const Department = () => {
       </Typography>
       <Box className="catalog-list">
         {types.map((type) => (
-          <TypeCard type={type}  />
+          <TypeCard key={type.id} type={type} />
         ))}
       </Box>
     </MainLayout>
@@ -33,7 +32,7 @@ const Department = () => {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
   const { slug } = context.params as IParams;
-  await store.dispatch(getDepartment(slug));
+  await store.dispatch(getDepartmentBySlug(slug));
   await store.dispatch(getTypesByDepartment(slug));
   return { props: {} };
 });

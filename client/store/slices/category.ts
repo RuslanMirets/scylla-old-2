@@ -4,10 +4,12 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 export interface CategoryState {
   categories: ICategory[];
+  category: ICategory | null;
 }
 
 const initialState: CategoryState = {
   categories: [],
+  category: null,
 };
 
 export const categorySlice = createSlice({
@@ -16,6 +18,9 @@ export const categorySlice = createSlice({
   reducers: {
     getCategoriesByType(state, action) {
       state.categories = action.payload;
+    },
+    getCategoryBySlug(state, action) {
+      state.category = action.payload;
     },
   },
   extraReducers: {

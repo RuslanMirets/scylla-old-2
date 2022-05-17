@@ -4,6 +4,8 @@ import { Department } from './models/department.model';
 import { DEPARTMENT_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
 import slugify from 'slugify';
+import { Op } from 'sequelize';
+import { Type } from '../type/models/type.model';
 
 @Injectable()
 export class DepartmentService {
@@ -20,6 +22,10 @@ export class DepartmentService {
     return await this.departmentRepository.findAll<Department>({ include: { all: true } });
   }
 
+  async findAllById(id: number): Promise<Department[]> {
+    return await this.departmentRepository.findAll({ where: { id } });
+  }
+
   async findOneById(id: number): Promise<Department> {
     return await this.departmentRepository.findOne<Department>({
       where: { id },
@@ -27,14 +33,16 @@ export class DepartmentService {
     });
   }
 
-  async findAllById(id: number): Promise<Department[]> {
-    return await this.departmentRepository.findAll({ where: { id } });
-  }
-
   async findOneBySlug(slug: string): Promise<Department> {
     return await this.departmentRepository.findOne<Department>({
       where: { slug },
       include: { all: true },
+    });
+  }
+
+  async findOneByType(slug: string): Promise<Department> {
+    return await this.departmentRepository.findOne<Department>({
+      include: [{ model: Type, where: { slug: { [Op.eq]: slug } } }],
     });
   }
 

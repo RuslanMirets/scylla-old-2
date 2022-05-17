@@ -4,10 +4,12 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 export interface TypeState {
   types: IType[];
+  type: IType | null
 }
 
 const initialState: TypeState = {
   types: [],
+  type: null
 };
 
 export const typeSlice = createSlice({
@@ -16,6 +18,9 @@ export const typeSlice = createSlice({
   reducers: {
     getTypesByDepartment(state, action) {
       state.types = action.payload;
+    },
+    getTypeBySlug(state, action) {
+      state.type = action.payload;
     },
   },
   extraReducers: {

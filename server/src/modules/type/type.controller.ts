@@ -59,6 +59,11 @@ export class TypeController {
     return this.typeService.findOneById(id);
   }
 
+  @Get('/slug/:slug')
+  findOneBySlug(@Param('slug') slug: string) {
+    return this.typeService.findOneBySlug(slug);
+  }
+
   @Patch(':id')
   update(@Body() dto: UpdateTypeDto, @Param('id') id: number) {
     return this.typeService.update(dto, id);

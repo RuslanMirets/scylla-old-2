@@ -8,6 +8,7 @@ import { PRODUCT_REPOSITORY } from './../../core/constants/index';
 import { Inject, Injectable } from '@nestjs/common';
 import { Department } from '../department/models/department.model';
 import { Op } from 'sequelize';
+import { Category } from '../category/models/category.model';
 
 @Injectable()
 export class ProductService {
@@ -63,6 +64,12 @@ export class ProductService {
   async findAllByDepartment(slug: string): Promise<Product[]> {
     return await this.productRepository.findAll<Product>({
       include: [{ model: Department, where: { slug: { [Op.eq]: slug } } }],
+    });
+  }
+
+  async findAllByCategory(slug: string): Promise<Product[]> {
+    return await this.productRepository.findAll<Product>({
+      include: [{ model: Category, where: { slug: { [Op.eq]: slug } } }],
     });
   }
 }

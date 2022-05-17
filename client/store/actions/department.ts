@@ -12,10 +12,19 @@ export const getDepartments = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const getDepartment = (slug: string) => async (dispatch: AppDispatch) => {
+export const getDepartmentBySlug = (slug: string) => async (dispatch: AppDispatch) => {
   try {
     const response = await getAPI(`department/slug/${slug}`);
-    dispatch(departmentSlice.actions.getDepartment(response.data));
+    dispatch(departmentSlice.actions.getDepartmentBySlug(response.data));
+  } catch (error: any) {
+    dispatch(alertSlice.actions.errors(error.response.data.message));
+  }
+};
+
+export const getDepartmentByType = (slug: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await getAPI(`department/type/${slug}`);
+    dispatch(departmentSlice.actions.getDepartmentByType(response.data));
   } catch (error: any) {
     dispatch(alertSlice.actions.errors(error.response.data.message));
   }

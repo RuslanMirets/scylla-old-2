@@ -28,6 +28,11 @@ export class DepartmentController {
     return this.departmentService.findOneBySlug(slug);
   }
 
+  @Get('type/:slug')
+  findOneByType(@Param('slug') slug: string) {
+    return this.departmentService.findOneByType(slug);
+  }
+
   @Patch(':id')
   update(@Body() dto: UpdateDepartmentDto, @Param('id') id: number) {
     return this.departmentService.update(dto, id);

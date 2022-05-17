@@ -19,7 +19,10 @@ export const departmentSlice = createSlice({
     getDepartments(state, action) {
       state.departments = action.payload;
     },
-    getDepartment(state, action) {
+    getDepartmentBySlug(state, action) {
+      state.department = action.payload;
+    },
+    getDepartmentByType(state, action) {
       state.department = action.payload;
     },
   },

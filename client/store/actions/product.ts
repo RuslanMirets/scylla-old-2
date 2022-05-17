@@ -11,3 +11,12 @@ export const getProductsByDepartment = (slug: string) => async (dispatch: AppDis
     dispatch(alertSlice.actions.errors(error.response.data.message));
   }
 };
+
+export const getProductsByCategory = (slug: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await getAPI(`product/category/${slug}`);
+    dispatch(productSlice.actions.getProductsByCategory(response.data));
+  } catch (error: any) {
+    dispatch(alertSlice.actions.errors(error.response.data.message));
+  }
+};
