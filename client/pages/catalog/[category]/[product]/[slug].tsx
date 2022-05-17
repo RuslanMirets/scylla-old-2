@@ -18,7 +18,7 @@ const Product: NextPage = () => {
   const { products } = useAppSelector((state) => state.product);
 
   return (
-    <MainLayout>
+    <MainLayout title={category?.description}>
       <Typography variant="h4" sx={{ marginBottom: '30px' }}>
         {category?.name}
       </Typography>

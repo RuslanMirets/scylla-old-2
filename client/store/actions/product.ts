@@ -20,3 +20,12 @@ export const getProductsByCategory = (slug: string) => async (dispatch: AppDispa
     dispatch(alertSlice.actions.errors(error.response.data.message));
   }
 };
+
+export const getProductById = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await getAPI(`product/${id}`);
+    dispatch(productSlice.actions.getProductById(response.data));
+  } catch (error: any) {
+    dispatch(alertSlice.actions.errors(error.response.data.message));
+  }
+};

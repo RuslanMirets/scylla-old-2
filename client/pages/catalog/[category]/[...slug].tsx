@@ -19,7 +19,7 @@ const Category: NextPage = () => {
   const { categories } = useAppSelector((state) => state.category);
 
   return (
-    <MainLayout>
+    <MainLayout title={type?.description}>
       <Typography variant="h4" sx={{ marginBottom: '30px' }}>
         {type?.name}
       </Typography>

@@ -22,6 +22,9 @@ export const productSlice = createSlice({
     getProductsByCategory(state, action) {
       state.products = action.payload;
     },
+    getProductById(state, action) {
+      state.product = action.payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {

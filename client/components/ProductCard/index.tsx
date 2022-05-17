@@ -21,7 +21,7 @@ export const ProductCard: React.FC<IProps> = ({ product }) => {
         </LinkItem>
       </CardContent>
       <CardActions className={styles.actions}>
-        <Typography className={styles.price}>{product.price} руб.</Typography>
+        <Typography className={styles.price}>{product.price} ₽</Typography>
         <Button variant="contained" color="primary">
           Купить
         </Button>

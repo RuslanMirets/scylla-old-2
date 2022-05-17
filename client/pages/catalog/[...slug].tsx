@@ -17,7 +17,7 @@ const Department = () => {
   const { types } = useAppSelector((state) => state.type);
 
   return (
-    <MainLayout>
+    <MainLayout title={department?.name === 'Мужчины' ? 'Мужской отдел' : 'Женский отдел'}>
       <Typography variant="h4" sx={{ marginBottom: '30px' }}>
         {department?.name === 'Мужчины' ? 'Мужской отдел' : 'Женский отдел'}
       </Typography>
