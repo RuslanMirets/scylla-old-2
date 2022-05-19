@@ -7,10 +7,10 @@ import { useAppSelector } from '../store/hooks';
 import React from 'react';
 
 function App({ Component, pageProps }: AppProps) {
-  const { cart } = useAppSelector((state) => state.cart);
-  React.useEffect(() => {
-    localStorage.setItem('__scylla__cart', JSON.stringify(cart));
-  }, [cart]);
+  // const { cart } = useAppSelector((state) => state.cart);
+  // React.useEffect(() => {
+  //   localStorage.setItem('__scylla__cart', JSON.stringify(cart));
+  // }, [cart]);
 
   return <Component {...pageProps} />;
 }

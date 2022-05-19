@@ -7,7 +7,7 @@ import { userReducer } from './slices/user';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import { typeReducer } from './slices/type';
-import { nextReduxCookieMiddleware } from 'next-redux-cookie-wrapper';
+import { nextReduxCookieMiddleware, wrapMakeStore } from 'next-redux-cookie-wrapper';
 
 export function makeStore() {
   return configureStore({
@@ -23,27 +23,13 @@ export function makeStore() {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
         nextReduxCookieMiddleware({
-          subtrees: ['cart'],
+          subtrees: ['cart', 'user'],
         }),
       ),
   });
 }
 
 export const store = makeStore();
-
-// const makeStore = wrapMakeStore(() =>
-//   createStore(
-//     reducer,
-//     composeWithDevTools(
-//       applyMiddleware(
-//         nextReduxCookieMiddleware({
-//           subtrees: ['cart'],
-//         }),
-//         thunk,
-//       ),
-//     ),
-//   ),
-// );
 
 export type RootStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<RootStore['getState']>;

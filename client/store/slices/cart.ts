@@ -17,6 +17,27 @@ export const cartSlice = createSlice({
     addToCart(state, action) {
       state.cart = action.payload;
     },
+    increment(state, action) {
+      return {
+        ...state,
+        cart: state.cart.map((product) =>
+          product.id === action.payload ? { ...product, quantity: product.quantity + 1 } : product,
+        ),
+      };
+    },
+    decrement(state, action) {
+      return {
+        ...state,
+        cart: state.cart.map((product) =>
+          product.id === action.payload
+            ? {
+                ...product,
+                quantity: product.quantity !== 1 ? product.quantity - 1 : 1,
+              }
+            : product,
+        ),
+      };
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {

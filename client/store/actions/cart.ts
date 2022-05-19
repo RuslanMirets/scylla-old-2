@@ -23,3 +23,19 @@ export const addToCart = (product: IProduct, cart: IProduct[]) => async (dispatc
     dispatch(alertSlice.actions.errors(error.response.data.message));
   }
 };
+
+export const increaseQuantity = (payload: string) => async (dispatch: AppDispatch) => {
+  try {
+    return dispatch(cartSlice.actions.increment(payload));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const decreaseQuantity = (payload: string) => async (dispatch: AppDispatch) => {
+  try {
+    return dispatch(cartSlice.actions.decrement(payload));
+  } catch (error) {
+    console.log(error);
+  }
+};
