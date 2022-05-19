@@ -4,6 +4,8 @@ import { IProduct } from '../../types/product';
 import classnames from 'classnames';
 import styles from './ProductInfo.module.scss';
 import { productImage } from '../../utils/constants';
+import { addToCart } from '../../store/actions/cart';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 interface IProps {
   product: IProduct;
@@ -22,8 +24,11 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
     return '';
   };
 
-  const handleClick = () => {
-    console.log(size);
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((state) => state.cart);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...product, size: product.size }, cart));
   };
 
   return (
@@ -34,7 +39,11 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
       <Paper className={styles.paper}>
         <div className={styles.body}>
           <div className={styles.images}>
-            <img className={styles.image} src={productImage + product.images[tab]} alt={product.title} />
+            <img
+              className={styles.image}
+              src={productImage + product.images[tab]}
+              alt={product.title}
+            />
             <div className={styles.thumbnail}>
               {product?.images.map((image, index) => (
                 <CardActionArea
@@ -91,8 +100,8 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
             <Divider />
             <Button
               variant="contained"
-              disabled={product!.inStock > 0 ? false : true}
-              onClick={handleClick}>
+              disabled={product.inStock > 0 ? false : true}
+              onClick={handleAddToCart}>
               Добавить в корзину
             </Button>
           </div>

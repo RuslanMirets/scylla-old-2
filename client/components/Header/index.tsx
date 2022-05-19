@@ -1,6 +1,7 @@
 import {
   AppBar,
   Avatar,
+  Badge,
   Box,
   Button,
   Container,
@@ -17,6 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import React, { useEffect, useState } from 'react';
 import { LinkItem } from '../LinkItem';
 import { NavItem } from '../NavItem';
@@ -37,6 +39,8 @@ const adminItems = [
 export const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const { user, registerData } = useAppSelector((state) => state.user);
+  const { cart } = useAppSelector((state) => state.cart);
+
   const isAdmin = user?.role[0].value === 'ADMIN';
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -49,6 +53,7 @@ export const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
+    //@ts-ignore
     destroyCookie(null, 'scyllaAuthToken', null);
     dispatch(logout());
     handleClose();
@@ -92,6 +97,13 @@ export const Header: React.FC = () => {
           <Box className={styles.actions}>
             {user ? (
               <>
+                <IconButton sx={{ marginRight: '10px' }}>
+                  <LinkItem href="/cart">
+                    <Badge badgeContent={`${cart.length}`} color="error">
+                      <ShoppingBasketOutlinedIcon fontSize="large" sx={{ color: '#fff' }} />
+                    </Badge>
+                  </LinkItem>
+                </IconButton>
                 <IconButton onClick={handleClick}>
                   <Avatar src={user.avatar} alt={user.name} />
                 </IconButton>

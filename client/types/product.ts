@@ -18,4 +18,5 @@ export interface IProduct {
   department: IDepartment;
   size: ISize[];
   images: IImage[];
+  quantity: number;
 }
