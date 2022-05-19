@@ -17,7 +17,7 @@ export const ProductCard: React.FC<IProps> = ({ product }) => {
       </LinkItem>
       <CardContent className={styles.content}>
         <LinkItem href={`/product/${product.id}`}>
-          <Typography variant="h6">{product.title}</Typography>
+          <Typography className={styles.title} variant="h6">{product.title}</Typography>
         </LinkItem>
       </CardContent>
       <CardActions className={styles.actions}>

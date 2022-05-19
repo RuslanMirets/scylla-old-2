@@ -34,7 +34,7 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
       <Paper className={styles.paper}>
         <div className={styles.body}>
           <div className={styles.images}>
-            <img src={productImage + product.images[tab]} alt={product.title} />
+            <img className={styles.image} src={productImage + product.images[tab]} alt={product.title} />
             <div className={styles.thumbnail}>
               {product?.images.map((image, index) => (
                 <CardActionArea
